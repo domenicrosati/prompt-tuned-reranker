@@ -150,7 +150,7 @@ class PromptTuningMixin:
         Args:
             soft_prompt_path: torch soft prompt file path
         """
-        self.soft_prompt = torch.load(
+        self.model.soft_prompt = torch.load(
             soft_prompt_path, map_location=torch.device("cpu")
         )
         self.n_tokens = self.model.soft_prompt.num_embeddings

@@ -71,17 +71,17 @@ for i, doc in dev_df.iterrows():
 train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=train_batch_size)
 
 
-# We add an evaluator, which evaluates the performance during training
-evaluator = CECorrelationEvaluator.from_input_examples(dev_samples, name='scifact-test')
+# # We add an evaluator, which evaluates the performance during training
+# evaluator = CECorrelationEvaluator.from_input_examples(dev_samples, name='scifact-test')
 
 
-# Train the model
-model.fit(train_dataloader=train_dataloader,
-          evaluator=evaluator,
-          epochs=num_epochs,
-          warmup_steps=warmup_steps,
-          output_path=model_save_path, show_progress_bar=True)
-model.save_soft_prompt('./output', f'{EVIDENCE_LABEL}-prompt.torch')
+# # Train the model
+# model.fit(train_dataloader=train_dataloader,
+#           evaluator=evaluator,
+#           epochs=num_epochs,
+#           warmup_steps=warmup_steps,
+#           output_path=model_save_path, show_progress_bar=True)
+# model.save_soft_prompt('./output', f'{EVIDENCE_LABEL}-prompt.torch')
 
 # #### Load model and eval on test set
 model = PromptTunedCrossEncoder('cross-encoder/ms-marco-MiniLM-L-12-v2', num_labels=1)
