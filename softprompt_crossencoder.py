@@ -400,6 +400,7 @@ class PromptTuningMixin:
 
         skip_scheduler = False
         self.model.train()
+        last_loss = None
         for epoch in trange(epochs, desc="Epoch", disable=not show_progress_bar):
             training_steps = 0
 
@@ -411,6 +412,7 @@ class PromptTuningMixin:
                     logits = logits.view(-1)
                 loss_value = loss_fct(logits, labels)
                 loss_value.backward()
+                last_loss = loss_value.cpu().detach()
                 torch.nn.utils.clip_grad_norm(
                     self.model.parameters(), max_grad_norm)
                 optimizer.step()
@@ -423,6 +425,10 @@ class PromptTuningMixin:
 
             self.model.zero_grad()
             self.model.train()
+
+            evaluator(self)
+            print('last_loss', last_loss)
+
 
 
 
