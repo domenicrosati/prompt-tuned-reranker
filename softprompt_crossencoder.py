@@ -426,7 +426,8 @@ class PromptTuningMixin:
             self.model.zero_grad()
             self.model.train()
 
-            evaluator(self)
+            if evaluator:
+                print(evaluator(self))
             print('last_loss', last_loss)
 
 
