@@ -421,7 +421,6 @@ class PromptTuningMixin:
 
             training_steps += 1
 
-            evaluator(self.model)
             self.model.zero_grad()
             self.model.train()
 
